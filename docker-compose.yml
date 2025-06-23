@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: ilumeo-db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=ilumeo_ponto
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

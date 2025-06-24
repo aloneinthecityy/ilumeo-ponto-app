@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { timeRecordsRouter } from '../../../modules/timeRecords/infra/http/routes/timeRecords.routes.ts';
+import { timeRecordsRouter } from '../../../modules/timeRecords/infra/http/routes/timeRecords.routes';
 
 const router = Router();
 

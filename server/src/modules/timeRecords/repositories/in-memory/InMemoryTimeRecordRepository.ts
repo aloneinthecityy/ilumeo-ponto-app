@@ -1,12 +1,9 @@
-// Em: src/modules/timeRecords/repositories/in-memory/InMemoryTimeRecordRepository.ts
 import { User } from '../../../users/entities/User';
 import { TimeRecord } from '../../entities/TimeRecord';
 import { ITimeRecordRepository } from '../ITimeRecordRepository';
 
 export class InMemoryTimeRecordRepository implements ITimeRecordRepository {
-  // Simula a tabela de "time_records"
   public timeRecords: TimeRecord[] = [];
-  // Simula a tabela de "users"
   public users: User[] = [];
 
   async findByUserIdAndDate(userId: string, date: Date): Promise<TimeRecord[]> {
@@ -33,7 +30,7 @@ export class InMemoryTimeRecordRepository implements ITimeRecordRepository {
   async findLastByUserId(userId: string): Promise<TimeRecord | null> {
     const userRecords = this.timeRecords
       .filter(item => item.userId === userId)
-      .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime()); // Ordena do mais recente para o mais antigo
+      .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
 
     return userRecords[0] || null;
   }
@@ -43,10 +40,16 @@ export class InMemoryTimeRecordRepository implements ITimeRecordRepository {
     timestamp: Date;
     type: 'IN' | 'OUT';
   }): Promise<TimeRecord> {
-    // Agora o 'data' que passamos aqui corresponde exatamente
-    // ao que o construtor do TimeRecord espera.
     const timeRecord = new TimeRecord(data);
     this.timeRecords.push(timeRecord);
     return timeRecord;
+  }
+
+  async findManyByUserId(userId: string): Promise<TimeRecord[]> {
+    const records = this.timeRecords
+      .filter(record => record.userId === userId)
+      .sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime()); // Ordena do mais antigo para o mais novo
+
+    return records;
   }
 }

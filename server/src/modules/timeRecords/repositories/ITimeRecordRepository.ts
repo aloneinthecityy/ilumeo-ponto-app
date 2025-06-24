@@ -5,4 +5,5 @@ export interface ITimeRecordRepository {
   findLastByUserId(userId: string): Promise<TimeRecord | null>;
   findByUserIdAndDate(userId: string, date: Date): Promise<TimeRecord[]>;
   findUserByAccessCode(accessCode: string): Promise<{ id: string, name: string } | null>;
+  findManyByUserId(userId: string): Promise<TimeRecord[]>;
 }

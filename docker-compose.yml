@@ -1,15 +1,25 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:14-alpine
-    container_name: ilumeo-db
     restart: always
     environment:
-      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=postgres  
+      - POSTGRES_PASSWORD=1234   
       - POSTGRES_DB=ilumeo_ponto
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
 
-volumes:
-  pgdata:
+  api:
+    build: ./server
+    restart: always
+    ports:
+      - "3333:3333"
+      - "5555:5555"
+    environment:
+      - DATABASE_URL=postgresql://postgres:1234@db:5432/ilumeo_ponto?schema=public
+    depends_on:
+      - db

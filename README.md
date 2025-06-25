@@ -1,7 +1,3 @@
-# Desafio Técnico Fullstack - Ponto Ilumeo
-
-Este repositório contém a solução do backend + testes para o desafio técnico do sistema de controle de ponto da Ilumeo.
-
 A aplicação foi desenvolvida em Node.js com TypeScript, seguindo os princípios S.O.L.I.D. para uma arquitetura limpa e testável. A persistência de dados é feita com PostgreSQL, gerenciado pelo ORM Prisma, e todo o ambiente é containerizado com Docker.
 
 ## Funcionalidades Implementadas
